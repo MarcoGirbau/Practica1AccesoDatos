@@ -6,7 +6,9 @@
 package practica1;
 
 import java.awt.Color;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -140,7 +142,11 @@ public class practica1 extends javax.swing.JFrame
     }//GEN-LAST:event_jMenuItem3MousePressed
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        // TODO add your handling code here:
+        if (evt.getActionCommand().equals(javax.swing.JFileChooser.APPROVE_SELECTION))
+        {
+            System.out.println("lo pilla");
+            jFileChooser1.getSelectedFile();
+        }
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
     /**
@@ -179,14 +185,30 @@ public class practica1 extends javax.swing.JFrame
     }
     public void EscribeFicheroTexto() 
     {    
-        String nombre = "1";
+        String texto = "1";
         try
         {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(nombre));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(texto));
         }
         catch (IOException ex)
         {
             System.out.println("error al escribir el fichero"); 
+        }
+    }
+    public void LeeFicheroTexto() 
+    {
+        try
+        {
+            String aux;
+            BufferedReader br = new BufferedReader(new FileReader(jFileChooser1.getSelectedFile()));
+            while((aux = br.readLine()) != null)
+            {
+                jTextArea1.setText(aux);
+            }
+        }
+        catch (IOException ex)
+        {
+            System.out.println("error al leer el fichero"); 
         }
     }
 
