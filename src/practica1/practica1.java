@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package practica1;
 
 import java.awt.Color;
@@ -46,8 +42,8 @@ public class practica1 extends javax.swing.JFrame
         jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         jFrame1.setResizable(false);
@@ -96,6 +92,9 @@ public class practica1 extends javax.swing.JFrame
 
         jMenu1.setText("File");
 
+        jMenuItem4.setText("Nuevo");
+        jMenu1.add(jMenuItem4);
+
         jMenuItem3.setText("Abrir Archivo");
         jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -103,9 +102,6 @@ public class practica1 extends javax.swing.JFrame
             }
         });
         jMenu1.add(jMenuItem3);
-
-        jMenuItem1.setText("Guardar");
-        jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Guardar como");
         jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,9 +213,9 @@ public class practica1 extends javax.swing.JFrame
     private javax.swing.JFrame jFrame1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
