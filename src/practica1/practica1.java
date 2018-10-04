@@ -1,7 +1,11 @@
-
+//- Que se guarde lo escrito en un archivo (HECHO)
+//- Que pueda abrir el texto de otros archivos(HECHO)
+//- Que se pueda modificar cosas de un archivo ya creado(HECHO)
+//- Mierdas visuales
 package practica1;
 
 import java.awt.Color;
+import java.awt.FileDialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -9,21 +13,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
- * @author xp
+ * @author Marco Girbau
  */
 public class practica1 extends javax.swing.JFrame 
 {
     /**
      * Creates new form practica1
      */
+    String nombreArchivo;
     public practica1() 
     {
         initComponents();
         setSize(700,500);
-        jMenuBar1.setBackground(Color.CYAN);
-        jFrame1.setVisible(false);
-        jFrame1.setSize(600, 350);
+        setTitle("Bloc de Notas ChachiPistachi");
     }
 
     /**
@@ -35,41 +37,14 @@ public class practica1 extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFrame1 = new javax.swing.JFrame();
-        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-
-        jFrame1.setResizable(false);
-
-        jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFileChooser1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
-        jFrame1.getContentPane().setLayout(jFrame1Layout);
-        jFrame1Layout.setHorizontalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jFrame1Layout.setVerticalGroup(
-            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jFrame1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        nuevo = new javax.swing.JMenuItem();
+        abrirArchivo = new javax.swing.JMenuItem();
+        guardar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,24 +67,29 @@ public class practica1 extends javax.swing.JFrame
 
         jMenu1.setText("File");
 
-        jMenuItem4.setText("Nuevo");
-        jMenu1.add(jMenuItem4);
-
-        jMenuItem3.setText("Abrir Archivo");
-        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem3MousePressed(evt);
+        nuevo.setText("Nuevo");
+        nuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        jMenu1.add(nuevo);
 
-        jMenuItem2.setText("Guardar como");
-        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenuItem2MousePressed(evt);
+        abrirArchivo.setText("Abrir Archivo");
+        abrirArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abrirArchivoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(abrirArchivo);
+
+        guardar.setText("Guardar como");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(guardar);
 
         jMenuBar1.add(jMenu1);
 
@@ -129,21 +109,34 @@ public class practica1 extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MousePressed
-        //jFrame1.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2MousePressed
-
-    private void jMenuItem3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem3MousePressed
-        jFrame1.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3MousePressed
-
-    private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
-        if (evt.getActionCommand().equals(javax.swing.JFileChooser.APPROVE_SELECTION))
+    private void abrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirArchivoActionPerformed
+        FileDialog fd = new FileDialog(practica1.this, "abrir archivo", FileDialog.LOAD);
+        fd.setVisible(true);
+        
+        if(fd.getFile() != null)
         {
-            System.out.println("lo pilla");
-            jFileChooser1.getSelectedFile();
+            nombreArchivo = fd.getDirectory() + fd.getFile();
+            setTitle(nombreArchivo);
         }
-    }//GEN-LAST:event_jFileChooser1ActionPerformed
+        LeeFicheroTexto();
+    }//GEN-LAST:event_abrirArchivoActionPerformed
+
+    private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
+        jTextArea1.setText("");
+        setTitle("Nuevo");
+    }//GEN-LAST:event_nuevoActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        FileDialog fd2 = new FileDialog(practica1.this, "guardar archivo", FileDialog.SAVE);
+        fd2.setVisible(true);
+        
+        if(fd2.getFile() != null)
+        {
+            nombreArchivo = fd2.getDirectory() + fd2.getFile();
+            setTitle(nombreArchivo);
+        }
+        EscribeFicheroTexto();
+    }//GEN-LAST:event_guardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,43 +174,49 @@ public class practica1 extends javax.swing.JFrame
     }
     public void EscribeFicheroTexto() 
     {    
-        String texto = "1";
-        try
+        try 
         {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(texto));
-        }
-        catch (IOException ex)
+            FileWriter fl =  new FileWriter(nombreArchivo);
+            fl.write(jTextArea1.getText());
+            setTitle(nombreArchivo);
+            fl.close();
+        } 
+        catch (IOException e) 
         {
-            System.out.println("error al escribir el fichero"); 
+            System.out.println("Error al guardar el archivo");
         }
     }
     public void LeeFicheroTexto() 
     {
-        try
+        try 
         {
-            String aux;
-            BufferedReader br = new BufferedReader(new FileReader(jFileChooser1.getSelectedFile()));
-            while((aux = br.readLine()) != null)
+            BufferedReader leer = new BufferedReader(new FileReader(nombreArchivo));
+            StringBuilder sb = new StringBuilder();
+            
+            String linea = null;
+            
+            while((linea = leer.readLine()) != null)
             {
-                jTextArea1.setText(aux);
+                sb.append(linea + "\n");
+                jTextArea1.setText(sb.toString());
             }
-        }
-        catch (IOException ex)
+            leer.close();
+        } 
+        catch (IOException e) 
         {
-            System.out.println("error al leer el fichero"); 
+            System.out.println("Error al abrir el archivo");
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JFrame jFrame1;
+    private javax.swing.JMenuItem abrirArchivo;
+    private javax.swing.JMenuItem guardar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JMenuItem nuevo;
     // End of variables declaration//GEN-END:variables
+
 }
