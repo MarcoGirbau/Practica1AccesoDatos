@@ -1,7 +1,7 @@
 //- Que se guarde lo escrito en un archivo (HECHO)
 //- Que pueda abrir el texto de otros archivos(HECHO)
 //- Que se pueda modificar cosas de un archivo ya creado(HECHO)
-//- Mierdas visuales
+//- Mierdas visuales(HECHO)
 package practica1;
 
 import java.awt.Color;
@@ -18,9 +18,9 @@ import java.io.IOException;
 public class practica1 extends javax.swing.JFrame 
 {
     /**
-     * Creates new form practica1
+     * Codigo de la primera practica de Acceso a Datos 
      */
-    String nombreArchivo;
+    String nombreArchivo;//Este string guarda el nombre del archivo que esta abierto junto a la ruta donde esta
     public practica1() 
     {
         initComponents();
@@ -110,6 +110,7 @@ public class practica1 extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirArchivoActionPerformed
+        //Este ActionPerformed es el que nos permite abrir archivos
         FileDialog fd = new FileDialog(practica1.this, "abrir archivo", FileDialog.LOAD);
         fd.setVisible(true);
         
@@ -122,11 +123,13 @@ public class practica1 extends javax.swing.JFrame
     }//GEN-LAST:event_abrirArchivoActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
+        //Este ActionPerformed es el que permite hacer un archivo nuevo
         jTextArea1.setText("");
         setTitle("Nuevo");
     }//GEN-LAST:event_nuevoActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        //Este ActionPerformed es el que permite guardar
         FileDialog fd2 = new FileDialog(practica1.this, "guardar archivo", FileDialog.SAVE);
         fd2.setVisible(true);
         
@@ -172,10 +175,11 @@ public class practica1 extends javax.swing.JFrame
             }
         });
     }
-    public void EscribeFicheroTexto() 
+    public void EscribeFicheroTexto() //Este es el metodo que nos permite escribir
     {    
         try 
         {
+//            BufferedWriter bf = new BufferedWriter(new FileWriter(nombreArchivo));
             FileWriter fl =  new FileWriter(nombreArchivo);
             fl.write(jTextArea1.getText());
             setTitle(nombreArchivo);
@@ -186,7 +190,7 @@ public class practica1 extends javax.swing.JFrame
             System.out.println("Error al guardar el archivo");
         }
     }
-    public void LeeFicheroTexto() 
+    public void LeeFicheroTexto()//Este es el metodo que nos permite leer
     {
         try 
         {
