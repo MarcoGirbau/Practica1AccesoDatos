@@ -123,7 +123,7 @@ public class practica1 extends javax.swing.JFrame
     }//GEN-LAST:event_abrirArchivoActionPerformed
 
     private void nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoActionPerformed
-        //Este ActionPerformed es el que permite hacer un archivo nuevo
+        //Este ActionPerformed es el que permite hacer un archivo nuevo vacio
         jTextArea1.setText("");
         setTitle("Nuevo");
     }//GEN-LAST:event_nuevoActionPerformed
@@ -179,11 +179,12 @@ public class practica1 extends javax.swing.JFrame
     {    
         try 
         {
-//            BufferedWriter bf = new BufferedWriter(new FileWriter(nombreArchivo));
-            FileWriter fl =  new FileWriter(nombreArchivo);
-            fl.write(jTextArea1.getText());
-            setTitle(nombreArchivo);
-            fl.close();
+            String textoArchivo = jTextArea1.getText();
+            BufferedWriter bf = new BufferedWriter(new FileWriter(nombreArchivo));
+            
+            textoArchivo = textoArchivo.replaceAll("\n", "\r\n");//Esto sirve para que haga los espaciados y saltos de linea
+            bf.write(textoArchivo);
+            bf.close();
         } 
         catch (IOException e) 
         {
@@ -195,7 +196,7 @@ public class practica1 extends javax.swing.JFrame
         try 
         {
             BufferedReader leer = new BufferedReader(new FileReader(nombreArchivo));
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();//Viva StarkOverflow
             
             String linea = null;
             
